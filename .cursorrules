@@ -1,0 +1,108 @@
+# 아로아로 믹싱 페스티벌 2025 - Cursor Rules
+
+## 프로젝트 컨텍스트
+- 아로아로 애니송 클럽 주최 온라인 믹싱 대회 웹사이트
+- 새로운 뉴비 디제이 발굴과 자유로운 믹싱 문화 확산이 목표
+- 실력 평가보다는 즐거운 분위기와 서로 응원하는 축제 문화 지향
+- 초심자 환영 정책: "호들갑 문화 / 칭찬 피드백 / 최대한 즐기기"
+
+## 기술 스택
+- **Frontend**: Next.js 14 (App Router), TypeScript, Tailwind CSS
+- **UI Components**: shadcn/ui 라이브러리 활용
+- **Icons**: Lucide React
+- **Package Manager**: pnpm
+- **Styling**: Tailwind CSS utility-first approach
+
+## 디자인 시스템 & 브랜딩
+- **Primary Colors**: 
+  - Pink/Red: `#FF6691`, `#FF7A7A`
+  - Blue/Purple: `#6568FF`
+  - Gold: `#D4AF37` (대회 강조용)
+- **Typography**: 한국어 지원 우선, 가독성 중시
+- **Tone**: 친근하고 활기찬 분위기, 축제적 느낌
+- **Visual Style**: 그라데이션, 호버 효과, 부드러운 애니메이션
+
+## 개발 가이드라인
+
+### 코딩 스타일
+- TypeScript strict mode 사용
+- React functional components + hooks 패턴
+- Tailwind CSS 유틸리티 클래스 우선 사용
+- shadcn/ui 컴포넌트 활용하여 일관성 유지
+- 반응형 디자인 필수 (mobile-first approach)
+
+### 컴포넌트 구조
+- 재사용 가능한 컴포넌트는 `/components/ui/` 디렉토리 활용
+- 페이지별 컴포넌트는 명확한 책임 분리
+- props는 TypeScript interface로 타입 정의
+
+### 성능 최적화
+- Next.js 14의 App Router 활용
+- 이미지 최적화 (next/image 사용)
+- 동적 임포트 적용
+- 불필요한 re-render 방지
+
+## 행사 관련 정보 (참고용)
+
+### 일정
+- 접수 기간: 7월 7일 ~ 8월 31일
+- 심사 종료: 9월 5일
+- 결과 발표: 9월 6일
+- 수상 기준 공지: 7월 7일
+
+### 공모 주제 (택 1)
+1. **유니존**: 애니송 100%, 최근 1년간 본 애니 중심
+2. **애니송 슬라이드**: 제공된 5곡 중 1~2곡 필수 포함
+3. **오타쿠 붐박스**: 서브컬처 기반, 자율 테마 2개 중심
+
+### 시상 구조
+- 행사상: 아로아로상 + 부문상 (유니존, 슬라이드, 붐박스)
+- 특별상: 심사위원 특별상 7개
+- 히든상: 금동미륵보살상, 김수한무상 등
+- 레귤러상: 아로아로 레귤러 DJ들의 자발적 시상
+
+## 개발 시 주의사항
+
+### UI/UX 원칙
+- 축제적이고 즐거운 분위기 유지
+- 사용자 친화적인 인터페이스 구현
+- 접근성 고려 (semantic HTML, ARIA labels)
+- 로딩 상태 및 에러 처리 적절히 구현
+
+### 콘텐츠 관리
+- 행사 정보 변경 시 일관성 유지
+- 다국어 지원 고려 (한국어 우선)
+- SEO 최적화 (메타 태그, 구조화된 데이터)
+
+### 브랜딩 일관성
+- 컬러 팔레트 준수
+- 타이포그래피 일관성 유지
+- 아이콘 사용 시 Lucide React 우선 활용
+- 애니메이션은 부드럽고 의미있게 적용
+
+## 코드 작성 시 참고사항
+
+### 네이밍 컨벤션
+- 컴포넌트: PascalCase (예: `AroAroFestival`)
+- 파일명: kebab-case (예: `mixing-festival.tsx`)
+- 변수/함수: camelCase (예: `scrollToSection`)
+- 클래스명: Tailwind utilities 우선
+
+### 상태 관리
+- 간단한 상태는 useState 활용
+- 복잡한 상태는 useReducer 고려
+- 전역 상태 필요 시 Context API 활용
+
+### 에러 처리
+- 사용자 친화적인 에러 메시지
+- 개발 환경과 프로덕션 환경 분리
+- 에러 바운더리 적절히 활용
+
+## 참고 리소스
+- **공식 문서**: Next.js, Tailwind CSS, shadcn/ui
+- **디자인 참고**: 음악 페스티벌, 애니메이션 이벤트 사이트
+- **해시태그**: #로싱스
+- **연락처**: contact@aroaro.com, @aroaro_official
+
+---
+이 규칙들을 바탕으로 아로아로 믹싱 페스티벌의 정체성과 목표에 맞는 코드를 작성해주세요. 
