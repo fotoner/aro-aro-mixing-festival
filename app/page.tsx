@@ -33,6 +33,8 @@ import {
   Zap,
   Heart,
   Gift,
+  ChevronDown,
+  Mouse,
 } from "lucide-react";
 
 export const useResponsive = () => {
@@ -67,21 +69,211 @@ export const useResponsive = () => {
   return screenSize;
 };
 
+// 애니메이션 키프레임 추가
+const floatingAwards = `
+  @keyframes slideAcross {
+    0% {
+      transform: translate(-100px, calc(100vh + 20px)) rotate(-15deg);
+      opacity: 0;
+    }
+    10% {
+      opacity: 0.1;
+    }
+    90% {
+      opacity: 0.1;
+    }
+    100% {
+      transform: translate(calc(100vw + 50px), -100px) rotate(-15deg);
+      opacity: 0;
+    }
+  }
+
+  @keyframes slideAcrossReverse {
+    0% {
+      transform: translate(calc(100vw + 50px), calc(100vh + 20px)) rotate(15deg);
+      opacity: 0;
+    }
+    10% {
+      opacity: 0.08;
+    }
+    90% {
+      opacity: 0.08;
+    }
+    100% {
+      transform: translate(-150px, -100px) rotate(15deg);
+      opacity: 0;
+    }
+  }
+
+  @keyframes slideAcrossVertical {
+    0% {
+      transform: translate(calc(100vw + 50px), -100px) rotate(-10deg);
+      opacity: 0;
+    }
+    10% {
+      opacity: 0.12;
+    }
+    90% {
+      opacity: 0.12;
+    }
+    100% {
+      transform: translate(-150px, calc(100vh + 20px)) rotate(-10deg);
+      opacity: 0;
+    }
+  }
+
+  @keyframes slideFromTop {
+    0% {
+      transform: translate(-20vw, -200px) rotate(20deg);
+      opacity: 0;
+    }
+    15% {
+      opacity: 0.1;
+    }
+    85% {
+      opacity: 0.1;
+    }
+    100% {
+      transform: translate(120vw, calc(100vh + 50px)) rotate(20deg);
+      opacity: 0;
+    }
+  }
+
+  @keyframes slideFromBottom {
+    0% {
+      transform: translate(120vw, calc(100vh + 50px)) rotate(-25deg);
+      opacity: 0;
+    }
+    15% {
+      opacity: 0.09;
+    }
+    85% {
+      opacity: 0.09;
+    }
+    100% {
+      transform: translate(-20vw, -200px) rotate(-25deg);
+      opacity: 0;
+    }
+  }
+
+  @keyframes slideFromLeft {
+    0% {
+      transform: translate(-200px, 50vh) rotate(5deg);
+      opacity: 0;
+    }
+    12% {
+      opacity: 0.11;
+    }
+    88% {
+      opacity: 0.11;
+    }
+    100% {
+      transform: translate(calc(100vw + 50px), -100px) rotate(5deg);
+      opacity: 0;
+    }
+  }
+
+  @keyframes slideFromRight {
+    0% {
+      transform: translate(calc(100vw + 50px), 20vh) rotate(-30deg);
+      opacity: 0;
+    }
+    12% {
+      opacity: 0.1;
+    }
+    88% {
+      opacity: 0.1;
+    }
+    100% {
+      transform: translate(-200px, 80vh) rotate(-30deg);
+      opacity: 0;
+    }
+  }
+
+  @keyframes slideFromCenter {
+    0% {
+      transform: translate(50vw, -150px) rotate(45deg);
+      opacity: 0;
+    }
+    20% {
+      opacity: 0.08;
+    }
+    80% {
+      opacity: 0.08;
+    }
+    100% {
+      transform: translate(-100px, calc(100vh + 50px)) rotate(45deg);
+      opacity: 0;
+    }
+  }
+
+  @keyframes scrollIndicator {
+    0%, 100% {
+      transform: translateY(0);
+      opacity: 0.7;
+    }
+    50% {
+      transform: translateY(10px);
+      opacity: 1;
+    }
+  }
+
+  @keyframes mouseScroll {
+    0%, 100% {
+      opacity: 0;
+    }
+    50% {
+      opacity: 1;
+    }
+  }
+`;
+
 // 히어로 섹션 스타일
 const HeroSection = styled.section`
+  ${floatingAwards}
   position: relative;
-  min-height: 100vh;
+  height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
   overflow: hidden;
   background: ${theme.colors.primary.red};
+
+  /* 레이아웃 이탈 방지 */
+  width: 100%;
+  max-width: 100vw;
+
+  ${mediaQuery.xs} {
+    min-height: 520px;
+  }
+
+  ${mediaQuery.sm} {
+    min-height: 540px;
+  }
+
+  ${mediaQuery.md} {
+    min-height: 620px;
+  }
+
+  ${mediaQuery.lg} {
+    min-height: 820px;
+  }
+
+  ${mediaQuery.xl} {
+    min-height: 950px;
+  }
 `;
 
 const AnimatedBackground = styled.div`
   position: absolute;
   inset: 0;
   overflow: hidden;
+
+  /* 레이아웃 이탈 방지 강화 */
+  width: 100%;
+  height: 100%;
+  max-width: 100vw;
+  max-height: 100vh;
 `;
 
 const FloatingIcon = styled.div<{
@@ -123,6 +315,7 @@ const HeroContent = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  width: 100%;
   z-index: 10;
   color: ${theme.colors.text.white};
 `;
@@ -158,6 +351,40 @@ const TitleContainer = styled.div`
   width: 100%;
   max-width: 1000px;
   position: relative;
+
+  img.title {
+    width: 100%;
+    object-fit: contain;
+    height: 200px;
+    margin-left: 120px;
+
+    ${mediaQuery.md} {
+      height: 300px;
+      margin-left: 180px;
+    }
+
+    ${mediaQuery.lg} {
+      height: 400px;
+      margin-left: 230px;
+    }
+
+    ${mediaQuery.xl} {
+      height: 500px;
+      margin-left: 280px;
+    }
+  }
+
+  img.sub-title {
+    width: 100%;
+    object-fit: contain;
+    height: 200px;
+    margin-left: 120px;
+    display: none;
+
+    @media (max-width: 500px) {
+      display: block;
+    }
+  }
 `;
 
 const TitleRow = styled.div<{ offset?: number }>`
@@ -250,18 +477,18 @@ const DateText = styled.div`
   text-align: center;
 
   ${mediaQuery.md} {
-    font-size: ${theme.typography.fontSize["4xl"]};
+    font-size: ${theme.typography.fontSize["5xl"]};
   }
 `;
 
 const HashtagText = styled.div`
-  font-size: ${theme.typography.fontSize["5xl"]};
+  font-size: ${theme.typography.fontSize["4xl"]};
   font-weight: ${theme.typography.fontWeight.bold};
   margin-bottom: ${theme.spacing["2xl"]};
   text-align: center;
 
   ${mediaQuery.md} {
-    font-size: ${theme.typography.fontSize["5xl"]};
+    font-size: ${theme.typography.fontSize["6xl"]};
   }
 `;
 
@@ -280,6 +507,98 @@ const CTAButton = styled(Button)`
     background: ${theme.colors.background.lightGray};
     transform: scale(1.05);
     box-shadow: ${theme.shadows.xl};
+  }
+`;
+
+// 스크롤 유도 아이콘 컨테이너
+const ScrollIndicatorContainer = styled.div`
+  position: absolute;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+  z-index: 20;
+  transition: all ${theme.animation.duration.normal}
+    ${theme.animation.easing.easeOut};
+
+  ${mediaQuery.md} {
+    bottom: 60px;
+  }
+
+  &:hover {
+    transform: translateX(-50%) scale(1.05);
+
+    * {
+      color: ${theme.colors.primary.gold};
+    }
+
+    > div > div:first-child {
+      border-color: ${theme.colors.primary.gold};
+
+      &::before {
+        background: ${theme.colors.primary.gold};
+      }
+    }
+  }
+`;
+
+const ScrollIndicatorIcon = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: ${theme.colors.text.white};
+  animation: scrollIndicator 2s ease-in-out infinite;
+  transition: all ${theme.animation.duration.normal}
+    ${theme.animation.easing.easeOut};
+`;
+
+const ScrollText = styled.div`
+  font-size: ${theme.typography.fontSize.sm};
+  font-weight: ${theme.typography.fontWeight.medium};
+  margin-top: ${theme.spacing.xs};
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  opacity: 0.9;
+
+  ${mediaQuery.md} {
+    font-size: ${theme.typography.fontSize.base};
+  }
+`;
+
+const MouseIcon = styled.div`
+  width: 24px;
+  height: 40px;
+  border: 2px solid ${theme.colors.text.white};
+  border-radius: 12px;
+  position: relative;
+  margin-bottom: ${theme.spacing.xs};
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 6px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 3px;
+    height: 6px;
+    background: ${theme.colors.text.white};
+    border-radius: 2px;
+    animation: mouseScroll 2s ease-in-out infinite;
+  }
+
+  ${mediaQuery.md} {
+    width: 28px;
+    height: 46px;
+    border-radius: 14px;
+
+    &::before {
+      width: 4px;
+      height: 8px;
+      top: 8px;
+    }
   }
 `;
 
@@ -468,25 +787,47 @@ const ThemeTitle = styled.div`
 
 const TaskSongTable = styled.div`
   overflow-x: auto;
-  margin: ${theme.spacing.md} 0;
+  margin: ${theme.spacing.sm} 0;
   border-radius: ${theme.borderRadius.md};
   border: 1px solid ${theme.colors.border.light};
+
+  ${mediaQuery.md} {
+    margin: ${theme.spacing.md} 0;
+  }
 `;
 
 const TableHeader = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
   background: ${theme.colors.background.lightGray};
-  padding: ${theme.spacing.md};
+  padding: ${theme.spacing.sm};
   font-weight: ${theme.typography.fontWeight.semibold};
   border-bottom: 1px solid ${theme.colors.border.light};
+  font-size: ${theme.typography.fontSize.xs};
+  gap: ${theme.spacing.sm};
+
+  ${mediaQuery.md} {
+    padding: ${theme.spacing.md};
+    font-size: ${theme.typography.fontSize.sm};
+    gap: ${theme.spacing.md};
+  }
+
+  ${mediaQuery.lg} {
+    font-size: ${theme.typography.fontSize.base};
+  }
 `;
 
 const TableRow = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
-  padding: ${theme.spacing.md};
+  padding: ${theme.spacing.sm};
   border-bottom: 1px solid ${theme.colors.border.light};
+  gap: ${theme.spacing.sm};
+
+  ${mediaQuery.md} {
+    padding: ${theme.spacing.md};
+    gap: ${theme.spacing.md};
+  }
 
   &:last-child {
     border-bottom: none;
@@ -500,11 +841,30 @@ const TableRow = styled.div`
 const SongTitle = styled.div`
   font-weight: ${theme.typography.fontWeight.medium};
   color: ${theme.colors.text.primary};
+  font-size: ${theme.typography.fontSize.xs};
+  line-height: 1.4;
+
+  ${mediaQuery.md} {
+    font-size: ${theme.typography.fontSize.sm};
+  }
+
+  ${mediaQuery.lg} {
+    font-size: ${theme.typography.fontSize.base};
+  }
 `;
 
 const AnimeInfo = styled.div`
   color: ${theme.colors.text.secondary};
-  font-size: ${theme.typography.fontSize.sm};
+  font-size: ${theme.typography.fontSize.xs};
+  line-height: 1.3;
+
+  ${mediaQuery.md} {
+    font-size: ${theme.typography.fontSize.sm};
+  }
+
+  ${mediaQuery.lg} {
+    font-size: ${theme.typography.fontSize.base};
+  }
 `;
 
 const ExampleTag = styled.span`
@@ -693,7 +1053,7 @@ const FooterSection = styled.footer`
 `;
 
 const FooterContainer = styled.div`
-  max-width: 1200px;
+  max-width: 1400px;
   margin: 0 auto;
   padding: 0 ${theme.spacing.lg};
 `;
@@ -845,6 +1205,50 @@ const FooterLogoText = styled.div`
   color: ${theme.colors.text.white};
 `;
 
+// 시상 목록 배경 애니메이션을 위한 새로운 컴포넌트
+const AwardFloating = styled.div<{
+  animation?: string;
+  duration?: string;
+  delay?: string;
+  fontSize?: string;
+}>`
+  position: absolute;
+  color: ${theme.colors.text.white};
+  font-weight: ${theme.typography.fontWeight.bold};
+  font-size: ${(props) => props.fontSize || "2rem"};
+  opacity: 0;
+  pointer-events: none;
+  z-index: 1;
+  white-space: nowrap;
+  user-select: none;
+
+  /* 레이아웃 이탈 방지 */
+  will-change: transform, opacity;
+  contain: layout style paint;
+
+  animation: ${(props) => props.animation || "slideAcross"}
+    ${(props) => props.duration || "25s"} linear infinite;
+  animation-delay: ${(props) => props.delay || "0s"};
+
+  ${mediaQuery.md} {
+    font-size: ${(props) => {
+      if (props.fontSize === "1.5rem") return "2rem";
+      if (props.fontSize === "2rem") return "2.5rem";
+      if (props.fontSize === "2.5rem") return "3rem";
+      return props.fontSize || "2.5rem";
+    }};
+  }
+
+  ${mediaQuery.lg} {
+    font-size: ${(props) => {
+      if (props.fontSize === "1.5rem") return "2.5rem";
+      if (props.fontSize === "2rem") return "3rem";
+      if (props.fontSize === "2.5rem") return "3.5rem";
+      return props.fontSize || "3rem";
+    }};
+  }
+`;
+
 export default function AroAroFestival() {
   const { width, height } = useResponsive();
   const [activeTab, setActiveTab] = useState("event");
@@ -865,6 +1269,7 @@ export default function AroAroFestival() {
       <HeroSection>
         {/* Animated Background Elements */}
         <AnimatedBackground>
+          {/* 기존 플로팅 아이콘들 */}
           <FloatingIcon top="80px" left="40px" animation="spin" opacity="0.1">
             <Disc3 size={64} />
           </FloatingIcon>
@@ -876,14 +1281,14 @@ export default function AroAroFestival() {
           >
             <Sparkles size={48} />
           </FloatingIcon>
-          <FloatingIcon
+          {/* <FloatingIcon
             bottom="128px"
             left="80px"
             animation="pulse"
             opacity="0.15"
           >
             <Headphones size={80} />
-          </FloatingIcon>
+          </FloatingIcon> */}
           <FloatingIcon
             top="240px"
             right="160px"
@@ -900,46 +1305,442 @@ export default function AroAroFestival() {
           >
             <Star size={32} />
           </FloatingIcon>
+
+          {/* 시상 목록 배경 애니메이션 - 실제 시상들만 */}
+          {/* 이벤트상/부문상 */}
+          <AwardFloating
+            animation="slideAcross"
+            duration="30s"
+            delay="0s"
+            fontSize="2.5rem"
+          >
+            아로아로상
+          </AwardFloating>
+
+          <AwardFloating
+            animation="slideAcrossReverse"
+            duration="35s"
+            delay="5s"
+            fontSize="2rem"
+          >
+            미끌미끌상
+          </AwardFloating>
+
+          <AwardFloating
+            animation="slideAcrossVertical"
+            duration="32s"
+            delay="10s"
+            fontSize="2.1rem"
+          >
+            유니존나재밌어상
+          </AwardFloating>
+
+          <AwardFloating
+            animation="slideAcross"
+            duration="28s"
+            delay="15s"
+            fontSize="2.2rem"
+          >
+            대박스붐박스상
+          </AwardFloating>
+
+          {/* 특별상 (랜덤 위치) */}
+          <AwardFloating
+            animation="slideFromLeft"
+            duration="33s"
+            delay="20s"
+            fontSize="1.9rem"
+          >
+            전파상
+          </AwardFloating>
+
+          <AwardFloating
+            animation="slideFromRight"
+            duration="29s"
+            delay="25s"
+            fontSize="2.3rem"
+          >
+            마리아의아잉 귀여운상
+          </AwardFloating>
+
+          <AwardFloating
+            animation="slideFromCenter"
+            duration="31s"
+            delay="30s"
+            fontSize="1.8rem"
+          >
+            신토불이상
+          </AwardFloating>
+
+          <AwardFloating
+            animation="slideFromBottom"
+            duration="27s"
+            delay="35s"
+            fontSize="2.1rem"
+          >
+            비상
+          </AwardFloating>
+
+          <AwardFloating
+            animation="slideFromTop"
+            duration="34s"
+            delay="40s"
+            fontSize="1.7rem"
+          >
+            카피바라상
+          </AwardFloating>
+
+          <AwardFloating
+            animation="slideFromLeft"
+            duration="26s"
+            delay="45s"
+            fontSize="2.4rem"
+          >
+            대상
+          </AwardFloating>
+
+          <AwardFloating
+            animation="slideFromRight"
+            duration="30s"
+            delay="50s"
+            fontSize="1.9rem"
+          >
+            세라믹상
+          </AwardFloating>
+
+          {/* 레귤러상 */}
+          <AwardFloating
+            animation="slideAcrossVertical"
+            duration="32s"
+            delay="55s"
+            fontSize="2rem"
+          >
+            일상물 난민상
+          </AwardFloating>
+
+          <AwardFloating
+            animation="slideAcross"
+            duration="28s"
+            delay="60s"
+            fontSize="1.8rem"
+          >
+            Jun상
+          </AwardFloating>
+
+          <AwardFloating
+            animation="slideAcrossReverse"
+            duration="35s"
+            delay="65s"
+            fontSize="2.2rem"
+          >
+            오늘은 내가 든든한 애니송 국밥 요리사상
+          </AwardFloating>
+
+          <AwardFloating
+            animation="slideAcrossVertical"
+            duration="29s"
+            delay="70s"
+            fontSize="1.9rem"
+          >
+            호우주의보상
+          </AwardFloating>
+
+          <AwardFloating
+            animation="slideAcross"
+            duration="33s"
+            delay="75s"
+            fontSize="2.1rem"
+          >
+            상상 그 이상
+          </AwardFloating>
+
+          {/* 히든상 */}
+          <AwardFloating
+            animation="slideAcrossReverse"
+            duration="31s"
+            delay="80s"
+            fontSize="2.3rem"
+          >
+            히든상
+          </AwardFloating>
+
+          {/* 추가 반복 애니메이션 - 주요 상들 (랜덤 위치) */}
+          <AwardFloating
+            animation="slideFromBottom"
+            duration="27s"
+            delay="60s"
+            fontSize="2rem"
+          >
+            아로아로상
+          </AwardFloating>
+
+          <AwardFloating
+            animation="slideFromCenter"
+            duration="34s"
+            delay="65s"
+            fontSize="1.8rem"
+          >
+            특별상
+          </AwardFloating>
+
+          <AwardFloating
+            animation="slideFromTop"
+            duration="30s"
+            delay="70s"
+            fontSize="2.4rem"
+          >
+            레귤러상
+          </AwardFloating>
+
+          {/* 다섯 번째 라운드 - 추가 랜덤 애니메이션 */}
+          <AwardFloating
+            animation="slideFromRight"
+            duration="24s"
+            delay="12s"
+            fontSize="1.9rem"
+          >
+            아로아로상
+          </AwardFloating>
+
+          <AwardFloating
+            animation="slideFromCenter"
+            duration="36s"
+            delay="18s"
+            fontSize="2.3rem"
+          >
+            미끌미끌상
+          </AwardFloating>
+
+          <AwardFloating
+            animation="slideFromLeft"
+            duration="28s"
+            delay="33s"
+            fontSize="1.6rem"
+          >
+            일상물 난민상
+          </AwardFloating>
+
+          <AwardFloating
+            animation="slideFromBottom"
+            duration="32s"
+            delay="38s"
+            fontSize="2.1rem"
+          >
+            전파상
+          </AwardFloating>
+
+          <AwardFloating
+            animation="slideFromTop"
+            duration="26s"
+            delay="58s"
+            fontSize="1.8rem"
+          >
+            카피바라상
+          </AwardFloating>
+
+          <AwardFloating
+            animation="slideFromRight"
+            duration="30s"
+            delay="63s"
+            fontSize="2.2rem"
+          >
+            히든상
+          </AwardFloating>
+
+          <AwardFloating
+            animation="slideFromCenter"
+            duration="25s"
+            delay="68s"
+            fontSize="1.7rem"
+          >
+            Jun상
+          </AwardFloating>
+
+          <AwardFloating
+            animation="slideFromLeft"
+            duration="29s"
+            delay="73s"
+            fontSize="2.4rem"
+          >
+            대상
+          </AwardFloating>
+
+          {/* 두 번째 라운드 - 더 빠른 주기 (랜덤 위치) */}
+          <AwardFloating
+            animation="slideFromTop"
+            duration="25s"
+            delay="45s"
+            fontSize="2.1rem"
+          >
+            전파상
+          </AwardFloating>
+
+          <AwardFloating
+            animation="slideFromLeft"
+            duration="29s"
+            delay="50s"
+            fontSize="1.9rem"
+          >
+            카피바라상
+          </AwardFloating>
+
+          <AwardFloating
+            animation="slideFromBottom"
+            duration="32s"
+            delay="55s"
+            fontSize="2.3rem"
+          >
+            마리아의아잉 귀여운상
+          </AwardFloating>
+
+          <AwardFloating
+            animation="slideFromRight"
+            duration="28s"
+            delay="35s"
+            fontSize="1.7rem"
+          >
+            신토불이상
+          </AwardFloating>
+
+          <AwardFloating
+            animation="slideFromCenter"
+            duration="31s"
+            delay="40s"
+            fontSize="2.2rem"
+          >
+            대상
+          </AwardFloating>
+
+          <AwardFloating
+            animation="slideFromTop"
+            duration="26s"
+            delay="25s"
+            fontSize="1.8rem"
+          >
+            세라믹상
+          </AwardFloating>
+
+          {/* 세 번째 라운드 - 레귤러상 반복 (랜덤 위치) */}
+          <AwardFloating
+            animation="slideFromRight"
+            duration="30s"
+            delay="30s"
+            fontSize="2rem"
+          >
+            일상물 난민상
+          </AwardFloating>
+
+          <AwardFloating
+            animation="slideFromCenter"
+            duration="27s"
+            delay="37s"
+            fontSize="1.9rem"
+          >
+            Jun상
+          </AwardFloating>
+
+          <AwardFloating
+            animation="slideFromLeft"
+            duration="33s"
+            delay="42s"
+            fontSize="2.1rem"
+          >
+            오늘은 내가 든든한 애니송 국밥 요리사상
+          </AwardFloating>
+
+          <AwardFloating
+            animation="slideFromBottom"
+            duration="28s"
+            delay="47s"
+            fontSize="1.8rem"
+          >
+            호우주의보상
+          </AwardFloating>
+
+          <AwardFloating
+            animation="slideFromTop"
+            duration="35s"
+            delay="52s"
+            fontSize="2.4rem"
+          >
+            상상 그 이상
+          </AwardFloating>
+
+          {/* 네 번째 라운드 - 부문상 반복 (랜덤 위치) */}
+          <AwardFloating
+            animation="slideFromCenter"
+            duration="29s"
+            delay="57s"
+            fontSize="2.2rem"
+          >
+            미끌미끌상
+          </AwardFloating>
+
+          <AwardFloating
+            animation="slideFromRight"
+            duration="31s"
+            delay="62s"
+            fontSize="1.9rem"
+          >
+            유니존나재밌어상
+          </AwardFloating>
+
+          <AwardFloating
+            animation="slideFromLeft"
+            duration="26s"
+            delay="67s"
+            fontSize="2.3rem"
+          >
+            대박스붐박스상
+          </AwardFloating>
+
+          <AwardFloating
+            animation="slideFromTop"
+            duration="34s"
+            delay="72s"
+            fontSize="1.7rem"
+          >
+            비상
+          </AwardFloating>
+
+          <AwardFloating
+            animation="slideFromBottom"
+            duration="32s"
+            delay="77s"
+            fontSize="2.5rem"
+          >
+            히든상
+          </AwardFloating>
         </AnimatedBackground>
 
-        <Container style={{ padding: "0" }}>
+        <Container
+          style={{
+            maxWidth: "1400px",
+            width: "1400px",
+            padding: "0",
+            position: "relative",
+            zIndex: 10,
+            overflow: "hidden",
+          }}
+        >
           <HeroContent>
-            <TopText>PRESENTED BY AROARO'S ANISONG CLUB</TopText>
+            <TopText>BY AROARO ANISONG EVENTS</TopText>
 
             <TitleContainer>
-              {/* 첫 번째 줄: 아로아로 (기본 위치) */}
-              <TitleRow offset={0}>
-                <MainText>
-                  아로아<AccentText>로</AccentText>
-                </MainText>
-              </TitleRow>
-
-              {/* 두 번째 줄: 2025 믹싱 (2글자만큼 들여쓰기) */}
-              <TitleRow offset={-1}>
-                <YearText>2025</YearText>
-                <MainText>
-                  믹<AccentText>싱</AccentText>
-                </MainText>
-              </TitleRow>
-
-              {/* 세 번째 줄: 페스티벌 (6글자만큼 들여쓰기) */}
-              {!!width && width < 530 && (
-                <TitleRow
-                  offset={-28}
-                  style={{ position: "absolute", top: "10rem" }}
-                >
-                  <MainText>페스티벌</MainText>
-                </TitleRow>
-              )}
-              <TitleRow offset={14}>
-                <MainText>
-                  페<AccentText>스</AccentText>티벌
-                </MainText>
-              </TitleRow>
+              <img src="/logo.png" alt="logo" className="title" />
+              <img
+                style={{
+                  position: "absolute",
+                  left: "-430px",
+                }}
+                src="/logo.png"
+                alt="logo"
+                className="sub-title"
+              />
             </TitleContainer>
 
             <DateText>7/8 ~ 8/24</DateText>
-            <HashtagText>#로싱스 #로싱스2025</HashtagText>
+            <HashtagText>#로싱스</HashtagText>
 
             <CTAButton onClick={() => scrollToSection("rules")}>
               <Music size={20} />
@@ -950,10 +1751,10 @@ export default function AroAroFestival() {
       </HeroSection>
 
       {/* About Section */}
-      <Section>
+      <Section id="about">
         <Container>
           <Flex direction="column" align="center" gap={theme.spacing["4xl"]}>
-            <Heading2 align="center">
+            <Heading2 style={{ lineHeight: "0.9" }} align="center">
               <Users
                 size={32}
                 style={{
@@ -968,52 +1769,62 @@ export default function AroAroFestival() {
             <div style={{ maxWidth: "600px", textAlign: "center" }}>
               <Text
                 style={{
-                  fontSize: theme.typography.fontSize.lg,
+                  fontSize: theme.typography.fontSize.xl,
                   lineHeight: "1.8",
-                  marginBottom: theme.spacing.lg,
+                  marginBottom: theme.spacing.xl,
                   color: theme.colors.text.primary,
+                  wordBreak: "keep-all",
                 }}
               >
                 <strong>2025 아로아로 믹싱 페스티벌, 줄여서 #로싱스</strong>는
-                <br />
                 애니송을 중심으로 한 믹스를 공유하는 오픈 믹싱 페스티벌입니다.
               </Text>
               <Text
                 style={{
-                  fontSize: theme.typography.fontSize.base,
-                  lineHeight: "1.7",
-                  marginBottom: theme.spacing.lg,
+                  fontSize: theme.typography.fontSize.xl,
+                  lineHeight: "1.8",
+                  marginBottom: theme.spacing.xl,
+                  color: theme.colors.text.primary,
+                  wordBreak: "keep-all",
                 }}
               >
-                믹싱 실력이나 경력에 관계없이, 3가지 공모 주제 중 하나를 선택해
-                <br />
-                나만의 개성과 취향이 담긴 35분 이상의 믹스를 자유롭게 제출할 수
-                있습니다.
+                믹싱 실력이나 경력에 관계없이,{" "}
+                <strong style={{ color: theme.colors.primary.pink }}>
+                  3가지 공모 주제
+                </strong>{" "}
+                중 하나를 선택해 나만의 개성과 취향이 담긴{" "}
+                <strong style={{ color: theme.colors.primary.blue }}>
+                  35분 이상의 믹스
+                </strong>
+                를 자유롭게 제출할 수 있습니다.
               </Text>
               <Text
                 style={{
-                  fontSize: theme.typography.fontSize.base,
-                  lineHeight: "1.7",
-                  marginBottom: theme.spacing.lg,
+                  fontSize: theme.typography.fontSize.xl,
+                  lineHeight: "1.8",
+                  marginBottom: theme.spacing.xl,
+                  color: theme.colors.text.primary,
+                  wordBreak: "keep-all",
                 }}
               >
                 형식과 스타일에 제한은 없으며, 각자 좋아하는 방식으로 애니송을
-                플레이해 <br />
-                나만의 애니송 믹싱을 많은 사람들과 공유해보세요.
+                플레이해 나만의 애니송 믹싱을 많은 사람들과 공유해보세요.
               </Text>
               <Text
                 style={{
-                  fontSize: theme.typography.fontSize.base,
-                  lineHeight: "1.7",
+                  fontSize: theme.typography.fontSize.xl,
+                  lineHeight: "1.8",
+                  marginBottom: theme.spacing.lg,
                   color: theme.colors.text.primary,
+                  wordBreak: "keep-all",
                 }}
               >
-                초보든 베테랑이든 상관없습니다, 각자의 스타일대로 즐겁게
-                참여해주세요!
+                <strong>초보든 베테랑이든 상관없습니다,</strong> 각자의
+                스타일대로 즐겁게 참여해주세요!
               </Text>
             </div>
 
-            <Grid
+            {/* <Grid
               columns={3}
               gap={theme.spacing.xl}
               style={{ marginTop: theme.spacing["2xl"] }}
@@ -1072,18 +1883,18 @@ export default function AroAroFestival() {
                     }}
                   />
                   <Heading3 color={theme.colors.primary.pink}>
-                    애니송 믹싱 공유하기
+                    믹싱 공유하기
                   </Heading3>
                   <Text
                     color={theme.colors.text.secondary}
                     style={{ marginTop: theme.spacing.sm }}
                   >
-                    형식과 스타일에 제한 없이 나만의 애니송 믹싱을 많은 사람들과
+                    형식과 스타일에 제한 없이 나만의 믹싱을 많은 사람들과
                     나눠보세요.
                   </Text>
                 </div>
               </Card>
-            </Grid>
+            </Grid> */}
           </Flex>
         </Container>
       </Section>
@@ -1182,8 +1993,8 @@ export default function AroAroFestival() {
                 color={theme.colors.text.secondary}
                 style={{ marginTop: theme.spacing.sm }}
               >
-                복수 선택은 불가하며, 여러 믹스를 제출하고 싶은 경우에는 각
-                믹스를 개별 주제에 맞춰 별도로 제출하셔야 합니다.
+                하나의 믹싱으로 복수 주제 선택은 불가하며, 여러 주제를 제출하고
+                싶은 경우에는 믹싱을 개별 주제에 맞춰 별도로 제출하셔야 합니다.
               </Text>
             </div>
 
@@ -1205,14 +2016,12 @@ export default function AroAroFestival() {
                       paddingLeft: theme.spacing.md,
                     }}
                   >
-                    TV, OVA, 극장판 애니메이션으로 송출된 적이 없는 일반 곡이나
-                    게임 음악 등은 포함할 수 없습니다.
+                    믹스셋에 사용될 곡은 애니 타이업
+                    악곡들(OP,ED,삽입곡,캐릭터송,특전곡)에 한해 가능합니다.
                   </Text>
                   <Text style={{ marginBottom: theme.spacing.md }}>
-                    •{" "}
-                    <strong>최근 1년 이내(2024년 7월 ~ 2025년 7월 사이)</strong>{" "}
-                    방영된 애니메이션 중 가장 재밌게 본 애니메이션을 공모폼에
-                    작성해주세요.
+                    • 자신이 좋아하는 애니메이션을 어필할 수 있는 세트리스트를
+                    만들어주세요.
                   </Text>
                 </div>
               </ThemeCard>
@@ -1226,9 +2035,8 @@ export default function AroAroFestival() {
                 </ThemeTitle>
                 <div style={{ marginLeft: "48px" }}>
                   <Text style={{ marginBottom: theme.spacing.md }}>
-                    • 믹스에는 참가자가 직접 정한{" "}
-                    <strong>서브컬처 기반 테마 2가지</strong>를 설정해 주셔야
-                    합니다.
+                    • 직접 정한 <strong>서브컬처 기반 테마 2가지</strong>를
+                    바탕으로 믹싱을 구성해주세요.
                   </Text>
                   <Text
                     style={{
@@ -1392,7 +2200,8 @@ export default function AroAroFestival() {
                       paddingLeft: theme.spacing.md,
                     }}
                   >
-                    전체 최종 수상 1명 (심사위원별 1~3위 선정, 가중치 반영)
+                    전체 공모제출자 중 1명 수상 (심사위원별 1~3위 선정, 가중치
+                    반영)
                   </Text>
                   <div
                     style={{
@@ -1418,7 +2227,7 @@ export default function AroAroFestival() {
                       color: theme.colors.primary.blue,
                     }}
                   >
-                    부문상 (각 행사별 1명 선정)
+                    부문상 (각 행사 주제별 1명 선정)
                   </Text>
                   <Text
                     style={{
@@ -1426,7 +2235,7 @@ export default function AroAroFestival() {
                       paddingLeft: theme.spacing.md,
                     }}
                   >
-                    유니존상 / 슬라이드상 / 붐박스상
+                    미끌미끌상 / 유니존나재밌어상 / 대박스붐박스상
                   </Text>
                   <div
                     style={{
@@ -1463,14 +2272,14 @@ export default function AroAroFestival() {
 
                 <div style={{ marginBottom: theme.spacing.lg }}>
                   <Text style={{ marginBottom: theme.spacing.md }}>
-                    심사위원 7인이 선정하고 수상하는 7가지의 상
+                    심사위원 7인이 각각 주제를 정해 선정하는 7개의 특별상이
+                    수여됩니다.
                   </Text>
                   <div
                     style={{
                       backgroundColor: theme.colors.background.pinkLight,
                       padding: theme.spacing.md,
                       borderRadius: theme.borderRadius.md,
-                      marginLeft: theme.spacing.md,
                     }}
                   >
                     <Text
@@ -1514,7 +2323,7 @@ export default function AroAroFestival() {
                         }}
                       >
                         전파계 애니송들을 어디로 넘겨도 사운드가 비는곳이 없이
-                        파격적으로 써주시는 분에게 이 상을 수여함
+                        파격적으로 써주시는 분
                       </Text>
                       <div
                         style={{
@@ -1561,8 +2370,7 @@ export default function AroAroFestival() {
                           lineHeight: "1.5",
                         }}
                       >
-                        여아애니 혹은 귀여운 노래를 귀엽고 신나게 써주신 분께
-                        드립니다.
+                        여아애니 혹은 귀여운 노래를 귀엽고 신나게 써주시는 분
                       </Text>
                       <div
                         style={{
@@ -1610,7 +2418,7 @@ export default function AroAroFestival() {
                         }}
                       >
                         음원발매일이 10년 이상 지난 곡들을 다수 사용하여 과거의
-                        추억을 가장 잘 표현한 참가자에게 수여함
+                        추억을 가장 잘 표현한 분
                       </Text>
                       <div
                         style={{
@@ -1665,7 +2473,7 @@ export default function AroAroFestival() {
                         }}
                       >
                         고 BPM의 캇코이한 노래들을 맛있게 사용하는 믹스를 선보인
-                        분에게 수상 (남성밴드 많을시 가산점)
+                        분 (남성밴드 많을시 가산점)
                       </Text>
                       <div
                         style={{
@@ -1712,7 +2520,7 @@ export default function AroAroFestival() {
                           lineHeight: "1.5",
                         }}
                       >
-                        시원한 밤산책하면서 듣기좋은 믹스셋을 선보인 분에게 수상
+                        시원한 밤산책하면서 듣기좋은 믹스셋을 선보인 분
                       </Text>
                       <div
                         style={{
@@ -1759,8 +2567,7 @@ export default function AroAroFestival() {
                           lineHeight: "1.5",
                         }}
                       >
-                        들으면 엉덩이가 절로 움직이는 믹스셋을 만든 분에게
-                        드리고 싶습니다
+                        들으면 엉덩이가 절로 움직이는 믹스셋을 만든 분
                       </Text>
                       <div
                         style={{
@@ -1810,9 +2617,8 @@ export default function AroAroFestival() {
                           lineHeight: "1.5",
                         }}
                       >
-                        세련된 노래로 세련된 비트를 써서 세련된
-                        편곡을쓰거나안쓰거나 세련된 흐름으로 세련된 믹싱을
-                        완성해주시는 분
+                        세련된 노래로 세련된 비트를 써서 세련된 편곡을 쓰거나
+                        안쓰거나 세련된 흐름으로 세련된 믹싱을 완성해주시는 분
                       </Text>
                       <div
                         style={{
@@ -1897,7 +2703,7 @@ export default function AroAroFestival() {
                           fontSize: theme.typography.fontSize.base,
                         }}
                       >
-                        일상물 난민 상
+                        일상물 난민상
                       </Heading3>
                       <Text
                         style={{
@@ -1906,8 +2712,8 @@ export default function AroAroFestival() {
                           lineHeight: "1.5",
                         }}
                       >
-                        일상물 계열 작품의 음악을 1곡이상 앞 뒷곡과 잘 어우러져
-                        사용하면 무니가 판단하여 선정
+                        일상물 작품의 음악(1곡 이상)을 앞뒤 곡과 잘 어우러지게
+                        써주시는 분
                       </Text>
                       <div
                         style={{
@@ -1945,7 +2751,7 @@ export default function AroAroFestival() {
                           fontSize: theme.typography.fontSize.base,
                         }}
                       >
-                        Jun 賞 상
+                        Jun상
                       </Heading3>
                       <Text
                         style={{
@@ -1954,7 +2760,7 @@ export default function AroAroFestival() {
                           lineHeight: "1.5",
                         }}
                       >
-                        계절과 어울리는 두근거림 만든 믹싱에게 주는 상
+                        계절의 이미지와 정취를 담은 믹스를 써주신 분
                       </Text>
                       <div
                         style={{
@@ -2001,9 +2807,8 @@ export default function AroAroFestival() {
                           lineHeight: "1.5",
                         }}
                       >
-                        위 DJ는 많은 컨텐츠곡들로 위화감없이 세트리를 준비하여
-                        많은 이들에게 여러 컨텐츠를 맛있게 먹여주었음을 인정하여
-                        이상을 수여함
+                        많은 컨텐츠곡들로 위화감없이 세트리를 준비하여 많은
+                        이들에게 여러 컨텐츠를 맛있게 먹여주신 분
                       </Text>
                       <div
                         style={{
@@ -2044,7 +2849,7 @@ export default function AroAroFestival() {
                           fontSize: theme.typography.fontSize.base,
                         }}
                       >
-                        호우주의보 상
+                        호우주의보상
                       </Heading3>
                       <Text
                         style={{
@@ -2053,9 +2858,8 @@ export default function AroAroFestival() {
                           lineHeight: "1.5",
                         }}
                       >
-                        BPM이 내려가는 믹스 (처음에는 강력하게 시작하지만 점점
-                        BPM이 느려지며 차분하게 마무리 되는 세트리스트를
-                        듣고싶습니다)
+                        BPM이 내려가는 믹스, 처음에는 강력하게 시작하지만 점점
+                        BPM이 느려지며 차분하게 마무리 되는 믹싱을 써주신 분
                       </Text>
                       <div
                         style={{
@@ -2103,8 +2907,8 @@ export default function AroAroFestival() {
                           lineHeight: "1.5",
                         }}
                       >
-                        이사람 이런거 틀꺼같다 싶은것에서 좋은 방향으로 다른모습
-                        보여주는 사람에게 주는 상
+                        평소 본인의 익숙한 이미지를 깨고, 생각지도 못한 또 다른
+                        매력을 선보인 믹스를 보여주신 분
                       </Text>
                       <div
                         style={{
@@ -2179,7 +2983,7 @@ export default function AroAroFestival() {
                   color: theme.colors.primary.pink,
                 }}
               />
-              응모 규정
+              공모 규정
             </Heading2>
 
             <div style={{ width: "100%" }}>
@@ -2190,23 +2994,23 @@ export default function AroAroFestival() {
                     size={20}
                     style={{ marginRight: theme.spacing.sm }}
                   />
-                  응모 방법/조건
+                  공모 방법/조건
                 </RuleTitle>
                 <RuleList>
                   <li>
-                    <strong>35분 이상의 믹싱을</strong> Mixcloud에 업로드 후
-                    X(트위터)에 링크를 공유해주세요.
+                    35분 이상 믹스를 Mixcloud에 업로드 후 X(트위터)에 링크를
+                    공유해주세요.
                   </li>
                   <li>
-                    <strong>공모폼에서</strong> 관련 정보 입력 및 주제를
-                    선택하여 제출해주세요.
+                    이후 사이트에 링크된 공모폼 작성 후 접수해주세요. (공모폼
+                    미제출 시 수상에서 제외)
                   </li>
                   <li>
-                    초심자도 적극 환영! 실력보다는{" "}
-                    <strong>즐거운 참여와 공유를</strong> 지향합니다.
+                    초심자도 적극 환영! 실력보다는 즐거운 참여와 공유를
+                    지향합니다.
                   </li>
                   <li>
-                    수상의 결과에 따라 각 행사의 게스트 참여에 지장이 없으셔야
+                    수상 결과에 따라 각 행사 게스트 참여에 지장이 없으셔야
                     합니다.
                   </li>
                 </RuleList>
@@ -2224,7 +3028,7 @@ export default function AroAroFestival() {
                       <strong>Mixcloud:</strong> #로싱스2025
                     </div>
                     <div>
-                      <strong>X/Twitter:</strong> #로싱스
+                      <strong>X/Twitter:</strong> #로싱스 #로싱스2025
                     </div>
                   </HashtagBox>
                 </div>
@@ -2238,20 +3042,21 @@ export default function AroAroFestival() {
                 </RuleTitle>
                 <RuleList>
                   <li>
-                    <strong>사용 악곡은 애니메이션 타이업 곡</strong>{" "}
-                    (OP・ED・삽입곡) 및 서브컬쳐 관련 원곡 위주로 구성해주세요.
+                    사용 악곡은 애니메이션 타이업 곡 (OP・ED・삽입곡) 및
+                    서브컬쳐 관련 원곡 위주로 구성해주세요.
                   </li>
                   <li>
-                    공식으로 유통되었거나, 애니메이션 내에서 사용된 리믹스는
-                    사용 가능합니다.
+                    공식으로 유통되었거나, 애니메이션 내에서 사용된 리믹스
+                    음원은 사용 가능합니다.
                   </li>
-                  <li>활동하지 않는 명의로의 응모는 삼가해주세요.</li>
+                  <li>각 공모자는 2개 이상의 상을 받을 수 없습니다.</li>
+                  <li>활동하지 않는 명의로의 참여는 삼가 주세요.</li>
                   <li>
-                    결과 발표 시 <strong>입상자의 DJ명과 간단한 코멘트</strong>
-                    를 공개할 예정입니다.
+                    결과 발표 시 입상자의 DJ명과 간단한 코멘트를 공개할
+                    예정입니다.
                   </li>
                   <li>
-                    저작권 관련 문제 발생 시 참가자 본인이 책임을 져야 합니다.
+                    저작권 관련 문제 발생 시 참여자 본인이 책임을 져야 합니다.
                   </li>
                 </RuleList>
               </RuleCard>
@@ -2323,7 +3128,7 @@ export default function AroAroFestival() {
                 rel="noopener noreferrer"
               >
                 <ExternalLink size={16} />
-                슬라이드 페이지
+                행사 소개
               </FooterLink>
               <FooterLink
                 href="https://x.com/ANISONGSLIDE"
@@ -2346,7 +3151,7 @@ export default function AroAroFestival() {
                 rel="noopener noreferrer"
               >
                 <ExternalLink size={16} />
-                유니존 페이지
+                행사 소개
               </FooterLink>
               <FooterLink
                 href="https://x.com/ANISONG_UNIZONE"
@@ -2368,7 +3173,7 @@ export default function AroAroFestival() {
                 rel="noopener noreferrer"
               >
                 <ExternalLink size={16} />
-                붐박스 페이지
+                행사 소개
               </FooterLink>
               <FooterLink
                 href="https://x.com/OTAKU_BOOMBOX"

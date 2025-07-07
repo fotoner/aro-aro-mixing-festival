@@ -100,6 +100,7 @@ export const theme = {
     xl: "0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)",
   },
   breakpoints: {
+    xs: "320px",
     sm: "640px",
     md: "768px",
     lg: "1024px",
@@ -132,6 +133,7 @@ export type Theme = typeof theme;
 
 // 미디어 쿼리 헬퍼
 export const mediaQuery = {
+  xs: `@media (min-width: ${theme.breakpoints.xs})`,
   sm: `@media (min-width: ${theme.breakpoints.sm})`,
   md: `@media (min-width: ${theme.breakpoints.md})`,
   lg: `@media (min-width: ${theme.breakpoints.lg})`,
