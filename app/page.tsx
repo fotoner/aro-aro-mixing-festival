@@ -1727,13 +1727,17 @@ export default function AroAroFestival() {
             <TopText>BY AROARO ANISONG EVENTS</TopText>
 
             <TitleContainer>
-              <img src="/logo.png" alt="logo" className="title" />
+              <img
+                src="/aro-aro-mixing-festival/logo.png"
+                alt="logo"
+                className="title"
+              />
               <img
                 style={{
                   position: "absolute",
                   left: "-430px",
                 }}
-                src="/logo.png"
+                src="/aro-aro-mixing-festival/logo.png"
                 alt="logo"
                 className="sub-title"
               />

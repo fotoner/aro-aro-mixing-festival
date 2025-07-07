@@ -12,6 +12,8 @@ const nextConfig = {
   output: "export",
   trailingSlash: true,
   distDir: "out",
+  basePath: "/aro-aro-mixing-festival",
+  assetPrefix: "/aro-aro-mixing-festival",
 };
 
 export default nextConfig;
