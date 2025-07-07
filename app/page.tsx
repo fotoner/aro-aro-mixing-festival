@@ -3093,7 +3093,7 @@ export default function AroAroFestival() {
       <FooterSection>
         <FooterContainer>
           <FooterLogo>
-            <FooterLogoText>아로아로 믹싱 페스티벌 2025</FooterLogoText>
+            <FooterLogoText>2025 아로아로 믹싱 페스티벌</FooterLogoText>
           </FooterLogo>
 
           <FooterGrid>

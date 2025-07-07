@@ -2,19 +2,18 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "로싱스 - 아로아로 믹싱 페스티벌 2025",
-  description:
-    "아로아로 애니송 클럽 주최 온라인 믹싱 대회 - 새로운 뉴비 디제이 발굴과 자유로운 믹싱 문화 확산",
-  keywords: "아로아로, 믹싱, 페스티벌, 애니송, DJ, 공모, 로싱스",
+  title: "2025 아로아로 믹싱 페스티벌",
+  description: "아로아로 애니송 이벤트 주최 온라인 믹싱 페스티벌",
+  keywords: "아로아로, 믹싱, 페스티벌, 애니송, DJ, 공모, 로싱스, 애니메이션",
   openGraph: {
-    title: "아로아로 믹싱 페스티벌 2025",
+    title: "2025 아로아로 믹싱 페스티벌",
     description: "아로아로 애니송 클럽 주최 믹싱 페스티벌",
     type: "website",
     locale: "ko_KR",
   },
   twitter: {
     card: "summary_large_image",
-    title: "아로아로 믹싱 페스티벌 2025",
+    title: "2025 아로아로 믹싱 페스티벌",
     description: "아로아로 애니송 클럽 주최 믹싱 페스티벌",
   },
 };
