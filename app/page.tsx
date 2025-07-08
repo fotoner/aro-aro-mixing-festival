@@ -1424,7 +1424,7 @@ export default function AroAroFestival() {
             delay="60s"
             fontSize="1.8rem"
           >
-            Jun상
+            계절이 느껴져 Jun상
           </AwardFloating>
 
           <AwardFloating
@@ -1553,7 +1553,7 @@ export default function AroAroFestival() {
             delay="68s"
             fontSize="1.7rem"
           >
-            Jun상
+            계절이 느껴져 Jun상
           </AwardFloating>
 
           <AwardFloating
@@ -1636,7 +1636,7 @@ export default function AroAroFestival() {
             delay="37s"
             fontSize="1.9rem"
           >
-            Jun상
+            계절이 느껴져 Jun상
           </AwardFloating>
 
           <AwardFloating
@@ -1746,7 +1746,15 @@ export default function AroAroFestival() {
             <DateText>7/8 ~ 8/24</DateText>
             <HashtagText>#로싱스</HashtagText>
 
-            <CTAButton onClick={() => scrollToSection("rules")}>
+            <CTAButton
+              onClick={() =>
+                window.open(
+                  "https://docs.google.com/forms/d/e/1FAIpQLSc9fMFUqiiC2NyAbhAQVCfBWdh-p-pJseK-N0OdejGa6Wzc3A/viewform",
+                  "_blank",
+                  "noopener,noreferrer"
+                )
+              }
+            >
               <Music size={20} />
               공모 접수하기
             </CTAButton>
@@ -2755,7 +2763,7 @@ export default function AroAroFestival() {
                           fontSize: theme.typography.fontSize.base,
                         }}
                       >
-                        Jun상
+                        계절이 느껴져 Jun상
                       </Heading3>
                       <Text
                         style={{
@@ -2764,7 +2772,8 @@ export default function AroAroFestival() {
                           lineHeight: "1.5",
                         }}
                       >
-                        계절의 이미지와 정취를 담은 믹스를 써주신 분
+                        특정한 계절의 느낌과 그 계절에 어울리는 장르의 조합이
+                        이루어진 믹스를 써주신 분
                       </Text>
                       <div
                         style={{
@@ -2779,7 +2788,7 @@ export default function AroAroFestival() {
                             fontWeight: theme.typography.fontWeight.medium,
                           }}
                         >
-                          🎁 싸이버거 세트
+                          🎁 느껴진 계절에 어울리는 1만원 상당의 선물
                         </Text>
                       </div>
                     </div>
@@ -3052,11 +3061,10 @@ export default function AroAroFestival() {
                     공식으로 유통되었거나, 애니메이션 내에서 사용된 리믹스
                     음원은 사용 가능합니다.
                   </li>
-                  <li>공모자는 2개 이상의 상을 받을 수 없습니다.</li>
-                  <li>활동하지 않는 명의로의 참여는 삼가 주세요.</li>
+                  <li>공모자는 한 개의 상만 받을 수 있습니다.</li>
+                  <li>DJ로 활동하는 명의로 공모에 참여해주세요.</li>
                   <li>
-                    결과 발표 시 입상자의 DJ명과 간단한 코멘트를 공개할
-                    예정입니다.
+                    결과 발표 시 입상자의 DJ명과 간단한 코멘트를 공개합니다.
                   </li>
                   <li>
                     저작권 관련 문제 발생 시 참여자 본인이 책임을 져야 합니다.
@@ -3079,7 +3087,15 @@ export default function AroAroFestival() {
               <CTAText>로싱스에 나만의 믹스를 공유해보세요</CTAText>
             </div>
 
-            <CTAButtonLarge>
+            <CTAButtonLarge
+              onClick={() =>
+                window.open(
+                  "https://docs.google.com/forms/d/e/1FAIpQLSc9fMFUqiiC2NyAbhAQVCfBWdh-p-pJseK-N0OdejGa6Wzc3A/viewform",
+                  "_blank",
+                  "noopener,noreferrer"
+                )
+              }
+            >
               <ExternalLink size={28} />
               공모 접수하기
             </CTAButtonLarge>
